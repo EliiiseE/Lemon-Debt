@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Expenses</h1>
+<button type="button" class="btn btn-danger">Danger</button> <table>
 
-<table>
+
   <thead>
     <tr>
       <th>Title</th>
@@ -15,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @expenses.each do |expense| %>
+    <%  @expenses.each do |expense| %>
       <tr>
         <td><%= expense.title %></td>
         <td><%= expense.category %></td>
