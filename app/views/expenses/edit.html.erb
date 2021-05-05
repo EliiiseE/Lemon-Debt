@@ -3,8 +3,15 @@
             small: "Your",
             large: "Expense!" %>
 
-<h1>Editing Expense</h1>
-
-<%= render 'form', expense: @expense %>
-
-<%= link_to 'Destroy', @expense, method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class=container">
+    <div class="col-5 offset-3">
+        <div class="row bg-secondary px-5 py-5">
+            <div>
+                <%= render 'form', expense: @expense %>
+            </div>
+            <div>
+                <button type="button" class="btn btn-danger py-2 px-4"><%= link_to 'Destroy', @expense, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-secondary" %></button>
+            </div>
+        </div>
+    </div>
+</div>

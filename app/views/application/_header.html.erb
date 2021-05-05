@@ -5,7 +5,17 @@
 %>
 
 <header>
-    <%= image %>     
-    <%= small %>
-    <%= large %>
+    <div>
+        <div class="row py-5 bg-primary rounded-bottom">
+            <div class="col-4 offset-1 d-flex flex-row justify-content-between align-items-center">
+                <div class="image">
+                    <%= image%>
+                </div>
+                <div class="d-flex flex-column">
+                    <p class="introduction__header text-secondary mb-0"><%= small %></p>
+                    <h1 class="text-secondary mb-0"><%= large %></h1>
+                </div>
+            </div>      
+        </div>
+    </div>
 </header>
