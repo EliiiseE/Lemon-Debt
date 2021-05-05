@@ -4,10 +4,12 @@ class ExpensesController < ApplicationController
   # GET /expenses or /expenses.json
   def index
     @expenses = Expense.all
+    redirect()
   end
 
   # GET /expenses/1 or /expenses/1.json
   def show
+    redirect()
   end
 
   # GET /expenses/new
@@ -64,6 +66,6 @@ class ExpensesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def expense_params
-      params.require(:expense).permit(:title, :category_id, :amount, :decimal, :date)
+      params.require(:expense).permit(:title, :category_id, :amount, :date)
     end
 end

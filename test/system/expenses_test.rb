@@ -17,7 +17,6 @@ class ExpensesTest < ApplicationSystemTestCase
     fill_in "Amount", with: @expense.amount
     fill_in "Category", with: @expense.category_id
     fill_in "Date", with: @expense.date
-    fill_in "Decimal", with: @expense.decimal
     fill_in "Title", with: @expense.title
     click_on "Create Expense"
 
@@ -32,7 +31,6 @@ class ExpensesTest < ApplicationSystemTestCase
     fill_in "Amount", with: @expense.amount
     fill_in "Category", with: @expense.category_id
     fill_in "Date", with: @expense.date
-    fill_in "Decimal", with: @expense.decimal
     fill_in "Title", with: @expense.title
     click_on "Update Expense"
 

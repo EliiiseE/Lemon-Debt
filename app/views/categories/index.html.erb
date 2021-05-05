@@ -1,29 +1,58 @@
-<p id="notice"><%= notice %></p>
+<%= render 'header',
+            image: image_tag('waving-hand.png'),
+            small: "Welcome back",
+            large: "John Doe!" %>
 
-<h1>Categories</h1>
+<div class="container">
+  <div class="col-4 offset-1">
+    <div class="row bg-secondary py-5 px-5 rounded">
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="d-flex flex-column">
+          <h2 class="text-dark mb-0">Expenses</h2>
+          <p class="text-light mt-0">Daily overview</p>
+        </div>
+        <h4 class="text-primary">$ <%= @totalExpenses %></h4>
+      </div>
+      <div class="d-flex flex-row justify-content-between align-items-center">
+      <% @categories.each do |category| %>
+        <%= image_tag(category.image, class: 'overview__image') %>
+      <% end %>
+      </div>
+    </div>
+    <div class="row bg-secondary py-5 px-5 my-5 rounded">
+      <h2 class="text-dark mb-0">New Expenses?</h2>
+      <p class="text-light mt-0">Here you can add a new expense</p>
+      <div>
+          <button type="button" class="btn btn-primary text-secondary py-2 px-4"><%= link_to 'Add', new_expense_path, class:"text-secondary"%></button>
+      </div>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="row">
+       <% @expenses.each do |expense| %>
+          <%= link_to edit_expense_path(expense), class:"bg-secondary py-2 px-4 rounded my-3" do %>
+            <%= image_tag(expense.category.image, size: 30) %>
+            <div class="d-flex flex-column">
+              <h3 class="text-dark mb-0"><%= expense.title%></h3>
+              <p class="text-light"><%= expense.category.title%></p>
+            </div>
+            <%= expense.amount %>
+          <% end %>
+        <% end %>
+  </div>
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.image %></td>
-        <td><%= category.title %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!--
 
-<br>
-
-<%= link_to 'New Category', new_category_path %>
+ <div class=" d-flex flex-row">
+          <% @expenses.each do |expense| %>
+            <%= link_to edit_expense_path(expense) do %>
+              <%= image_tag(expense.category.image, size: 30) %>
+                <div class="d-flex flex-column">
+                  <h3 class="text-dark mb-0"><%= expense.title %></h3>
+                  <p class="text-light"><%= expense.category.title %></p>
+                </div>
+             <h3><%= expense.amount %></h3>
+          </div>
+            <% end %>
+          <% end %>
+        </div>
+-->

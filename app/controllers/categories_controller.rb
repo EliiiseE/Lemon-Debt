@@ -4,19 +4,28 @@ class CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
     @categories = Category.all
+    @expenses = Expense.all
+
+    @totalExpenses = 0
+    @expenses.each do |expense|
+      @totalExpenses += expense.amount
+    end
   end
 
   # GET /categories/1 or /categories/1.json
   def show
+    redirect()
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    redirect()
   end
 
   # GET /categories/1/edit
   def edit
+    redirect()
   end
 
   # POST /categories or /categories.json
