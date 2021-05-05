@@ -12,3 +12,4 @@
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>
+<%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %>

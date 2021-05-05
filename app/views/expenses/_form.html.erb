@@ -2,16 +2,21 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :title, as: :string, label: "Title", placeholder: 'Bubble Tea 🧋', required: true, error: 'Error', autofocus: true %>
-    <%= f.association :category, as: :select, label: "Category", prompt: 'Select your category...', required: true, error: 'Please, select a valid category.' %>
-    <%= f.input :amount, label: "Amount", placeholder: '6,50', required: true, error: 'Error' %>
-    <%= f.input :date, as: :date, label: "Date", required: true, error: 'Error' %>
+  <div class="form-inputs mx-5">
+    <%= f.input :title, as: :string, label: "Title", placeholder: 'Bubble Tea 🧋', required: true, error: 'Error', autofocus: true, label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-5' }  %>
+    <%= f.association :category, as: :select, label: "Category", prompt: 'Select your category...', required: true, error: 'Please, select a valid category.', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-5' } %>
+    <%= f.input :amount, label: "Amount", placeholder: '6,50', required: true, error: 'Error', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-5' } %>
+    <%= f.input :date, as: :date, label: "Date", required: true, error: 'Error', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-5' } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-actions d-flex justify-content-center align-items-center mt-5">
+    <% if request.path != '/expenses/new' %>
+      <button type="button" class="btn btn-danger py-2 px-4 mx-2"><%= link_to 'Delete', @expense, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-secondary" %></button>
+    <% end %>
+    <%= f.button :submit, '  Save  ', class:"text-secondary btn btn-primary py-2 px-4 mx-5" %>
   </div>
 <% end %>
 
 <%# label_method: image_tag(:image) %>
+
+<!-- label_html: { class: 'text-secondary ml-4' }, wrapper_html: { class: 'col-md-6' }, :input_html => { class: 'input-form px-3 py-3' } -->
