@@ -1,55 +1,51 @@
 <%= render 'header',
-            image: image_tag('waving-hand.png'),
+            image: 'waving-hand.png',
             small: "Welcome back,",
             large: "John Doe!" %>
 
-<div class="container d-flex">
-  <div class="d-flex flex-row justify-content-between align-items-start">
+<div class="container">
+  <div class="row offset-0 offset-lg-1">
+    <div class="col-12 col-lg-5 mt-3">
 
-    <div class="col-4 offset-1 mt-3">
-      <div class="row bg-secondary py-5 px-5 rounded">
+      <div class="bg-secondary py-5 px-5 rounded">
         <div class="d-flex flex-row justify-content-between align-items-center">
           <div class="d-flex flex-column">
             <h2 class="text-dark mb-0">Expenses</h2>
             <p class="text-light mt-0">Daily overview</p>
           </div>
-          <h4 class="text-primary">$ <%= @totalExpenses %></h4>
+          <h4 class="text-primary">$<%= @totalExpenses %></h4>
         </div>
-        <div class="d-flex flex-row justify-content-between align-items-center">
-        <% @categories.each do |category| %>
-          <%= image_tag(category.image, class: 'overview__image') %>
-        <% end %>
+        <div class="d-flex flex-row justify-content-between align-items-center mt-3">
+          <% @categories.each do |category| %>
+            <%= image_tag(category.image, class: 'overview__image') %>
+          <% end %>
         </div>
       </div>
-      <div class="row bg-secondary py-5 px-5 my-5 rounded">
+
+      <div class="d-none d-lg-block bg-secondary py-5 px-5 mt-5 rounded">
         <h2 class="text-dark mb-0">New Expenses?</h2>
         <p class="text-light mt-0">Here you can add a new expense</p>
-        <div>
-            <button type="button" class="btn btn-primary text-secondary py-2 px-4"><%= link_to 'Add', new_expense_path, class:"text-secondary"%></button>
-        </div>
+        <button type="button" class="btn btn-primary text-secondary py-2 px-4"><%= link_to 'Add', new_expense_path, class:"text-secondary"%></button>
       </div>
+
+    </div> 
+
+    <div class="col-12 col-lg-5 offset-0 offset-lg-1 mt-5 mt-lg-3">
+      <% @expenses.each do |expense| %>
+        <%= link_to edit_expense_path(expense), class:"d-block bg-secondary py-4 px-4 rounded mb-3" do %>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-start align-items-center">
+              <%= image_tag(expense.category.image, size: 40) %>
+              <div class="d-flex flex-column align-items-start justify-content-center mx-3">
+                <h3 class="text-dark mb-0"><%= expense.title%></h3>
+                <p class="text-light mb-0"><%= expense.category.title%></p>
+              </div>
+            </div>
+            <h2 class="text-primary my-0 mx-2">$<%= expense.amount %></h2>
+          </div>
+        <% end %>
+      <% end %>
     </div>
 
-    <div class="col-5 mx-5">
-      <div class="row mx-4">
-        <% @expenses.each do |expense| %>
-            <%= link_to edit_expense_path(expense), class:"bg-secondary py-4 px-4 rounded my-3" do %>
-            <div class="d-flex flex-row justify-content-between align-items-center">
-              <div class="d-flex flex-row align-items-center">
-                <div class="mx-2">
-                  <%= image_tag(expense.category.image, size: 40) %>
-                </div>
-                <div class="d-flex flex-column mx-3">
-                  <h3 class="text-dark mb-0"><%= expense.title%></h3>
-                  <p class="text-light mb-0"><%= expense.category.title%></p>
-                </div>
-              </div>
-                <h2 class="text-primary mx-2">$<%= expense.amount %></h2>
-            </div>
-            <% end %>
-          <% end %>
-      </div>
-    </div>
-   
   </div>
 </div>

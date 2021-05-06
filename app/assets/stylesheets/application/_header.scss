@@ -1,12 +1,12 @@
 .introduction__header{
 	font-size: 35px;
+    	@media screen  and (max-width: 600px) {
+		font-size: 18px;
+	}
 }
 
+
 .image{
-    img{
-        width: 109px;
-        height: auto;
-        margin-left:60%;
-    }
-   
+    width: 109px;
+    height: auto;
 }
