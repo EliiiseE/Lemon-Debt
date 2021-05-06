@@ -3,17 +3,18 @@
     small ||= nil
     large ||= nil
 %>
-
+ 
 <header>
-    <div>
-        <div class="row py-5 bg-primary rounded-bottom">
-            <div class="col-10 offset-1 d-flex flex-row justify-content-start align-items-center">
-                <%= image_tag(image, class: 'image img-fluid') %>
-                <div class="d-flex flex-column mx-3">
-                    <p class="introduction__header text-secondary mb-0"><%= small %></p>
-                    <h1 class="text-secondary mb-0"><%= large %></h1>
-                </div>
-            </div>      
-        </div>
+    <% if request.path != '/categories' && request.path != '/' %>
+        <%=link_to 'Back', '/', class:'position-absolute text-secondary btn-back header__btn-hover' %>
+    <% end %>
+    <div class="row py-5 bg-primary rounded-bottom">
+        <div class="col-10 offset-1 d-flex flex-row justify-content-start align-items-center">
+            <%= image_tag(image, class: 'image img-fluid') %>
+            <div class="d-flex flex-column mx-3">
+                <p class="introduction__header text-secondary mb-0"><%= small %></p>
+                <h1 class="text-secondary mb-0"><%= large %></h1>
+            </div>
+        </div>      
     </div>
 </header>

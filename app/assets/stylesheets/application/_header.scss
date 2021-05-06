@@ -11,6 +11,19 @@
 	animation: icon-spin 0.5s ease forwards;
 }
 
+.btn-back{
+	left: 3%;
+	top: 3%;
+}
+
+.header__btn-hover{
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+ &:hover{
+    transform: scale(1.05);
+ }
+}
+
+
 @keyframes icon-spin {
 	0% {
 		transform: rotate(0);

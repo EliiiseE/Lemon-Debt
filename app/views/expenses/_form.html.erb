@@ -10,9 +10,9 @@
   </div>
 
   <div class="form-actions d-flex justify-content-center align-items-center mt-5">
-    <% if request.path != '/expenses/new' %>
-      <button type="button" class="btn btn-danger py-2 px-4 mx-2 mx-lg-5"><%= link_to 'Delete', @expense, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-secondary" %></button>
+    <% if request.path != '/expenses/new' && request.path != '/expenses' %>
+      <button type="button" class="btn btn-danger py-2 px-4 mx-2 mx-lg-5 btn-hover"><%= link_to 'Delete', @expense, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-secondary" %></button>
     <% end %>
-    <%= f.button :submit, '  Save  ', class:"text-secondary btn btn-primary py-2 px-4 mx-2 mx-lg-5 font-size" %>
+    <%= f.button :submit, '  Save  ', class:"text-secondary btn btn-primary py-2 px-4 mx-2 mx-lg-5 font-size btn-hover" %>
   </div>
 <% end %>
