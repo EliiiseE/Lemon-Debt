@@ -5,8 +5,30 @@
 	}
 }
 
-
 .image{
-    width: 109px;
+    width: 100px;
     height: auto;
+	animation: icon-spin 0.5s ease forwards;
+}
+
+@keyframes icon-spin {
+	0% {
+		transform: rotate(0);
+	}
+
+	30% {
+		transform: rotate(-10deg);
+	}
+
+	50% {
+		transform: rotate(8deg);
+	}
+
+	70% {
+		transform: rotate(-7deg);
+	}
+
+	100% {
+		transform: rotate(0);
+	}
 }

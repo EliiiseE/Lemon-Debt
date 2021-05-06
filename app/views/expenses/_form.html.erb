@@ -5,7 +5,7 @@
   <div class="form-inputs mx-lg-5">
     <%= f.input :title, as: :string, label: "Title", placeholder: 'Bubble Tea 🧋', required: true, error: 'Error', autofocus: true, label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-lg-5' }  %>
     <%= f.association :category, as: :select, label: "Category", prompt: 'Select your category...', required: true, error: 'Please, select a valid category.', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-lg-5' } %>
-    <%= f.input :amount, label: "Amount", placeholder: '6,50', required: true, error: 'Error', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-lg-5' } %>
+    <%= f.input :amount, label: "Amount", placeholder: '6,50', required: true, error: 'Error', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark', value: number_with_precision(f.object.amount, precision: 2) }, wrapper_html: { class: 'mx-lg-5' } %>
     <%= f.input :date, as: :date, label: "Date", required: true, error: 'Error', label_html: { class: 'text-primary mt-4 mb-2' }, :input_html => { class: 'input-form text-dark' }, wrapper_html: { class: 'mx-lg-5' } %>
   </div>
 

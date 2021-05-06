@@ -1,4 +1,27 @@
 .overview__image {
     width: 40px;
     height: auto;
+    cursor: pointer;
+}
+
+.category__btn-container {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 60px;
+}
+
+.category__btn-fixed {
+    margin-top: -30px;
+    img {
+        width: 60px;
+    }
+}
+
+.expense-hover{
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+ &:hover{
+    box-shadow: 1px 1px 12px rgb(219, 219, 219);
+    transform: scale(1.05);
+ }
 }

@@ -3,9 +3,24 @@
             small: "Welcome back,",
             large: "John Doe!" %>
 
+<!--
+
+<svg xmlns="http://www.w3.org/2000/svg" width="277" height="277" viewBox="0 0 277 277">
+  <g id="Ellipse_10" data-name="Ellipse 10" fill="none" stroke="#707070" stroke-width="20">
+    <circle cx="138.5" cy="138.5" r="138.5" stroke="none"/>
+    <circle cx="138.5" cy="138.5" r="128.5" fill="none"/>
+  </g>
+  <g id="Ellipse_11" data-name="Ellipse 11" fill="none" stroke="red" stroke-width="20">
+    <circle cx="138.5" cy="138.5" r="138.5" stroke="none"/>
+    <circle cx="138.5" cy="138.5" r="128.5" fill="none"/>
+  </g>
+</svg>
+
+-->
+
 <div class="container">
   <div class="row offset-0 offset-lg-1">
-    <div class="col-12 col-lg-5 mt-3">
+    <div class="col-12 col-lg-5">
 
       <div class="bg-secondary py-5 px-5 rounded">
         <div class="d-flex flex-row justify-content-between align-items-center">
@@ -13,11 +28,11 @@
             <h2 class="text-dark mb-0">Expenses</h2>
             <p class="text-light mt-0">Daily overview</p>
           </div>
-          <h4 class="text-primary">$<%= @totalExpenses %></h4>
+          <h4 class="text-primary">$<span id="total-expenses" data-total=<%= @totalExpenses.round(2) %>><%= @totalExpenses.round(2) %></span></h4>
         </div>
         <div class="d-flex flex-row justify-content-between align-items-center mt-3">
           <% @categories.each do |category| %>
-            <%= image_tag(category.image, class: 'overview__image') %>
+            <%= image_tag(category.image, class: 'overview__image', :data => { :title => category.title }) %>
           <% end %>
         </div>
       </div>
@@ -30,9 +45,9 @@
 
     </div> 
 
-    <div class="col-12 col-lg-5 offset-0 offset-lg-1 mt-5 mt-lg-3">
+    <div class="col-12 col-lg-5 offset-0 offset-lg-1 mt-5 mt-lg-0 mb-5 pb-5">
       <% @expenses.each do |expense| %>
-        <%= link_to edit_expense_path(expense), class:"d-block bg-secondary py-4 px-4 rounded mb-3" do %>
+        <%= link_to edit_expense_path(expense), class:"d-block bg-secondary py-4 px-4 rounded mb-3 expense-hover", :data => { :title => expense.category.title, :expense => expense.amount.round(2) } do %>
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-start align-items-center">
               <%= image_tag(expense.category.image, size: 40) %>
@@ -41,7 +56,7 @@
                 <p class="text-light mb-0"><%= expense.category.title%></p>
               </div>
             </div>
-            <h2 class="text-primary my-0 mx-2">$<%= expense.amount %></h2>
+            <h2 class="text-primary my-0 mx-2">$<%= expense.amount.round(2) %></h2>
           </div>
         <% end %>
       <% end %>
@@ -49,3 +64,80 @@
 
   </div>
 </div>
+
+<div class="d-block d-lg-none">   
+  <div class="category__btn-container bg-info d-flex justify-content-center align-items-center">
+    <%=link_to new_expense_path, class: 'category__btn-fixed' do%>
+      <%= image_tag("cross.png", class:"category__btn-add") %>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  // Variables
+  var $categories = document.querySelectorAll('.overview__image')
+  var $expenses = document.querySelectorAll('.expense-hover')
+  var lastCategoryClicked = null
+
+  // Listener onclick
+  $categories.forEach(category => {
+    category.addEventListener('click', (e) => {
+      var categoryTitle = e.srcElement.getAttribute('data-title')
+      
+      checkExpense(categoryTitle)
+    })
+  })
+
+  // Function to check related expense
+  var checkExpense = (categoryTitle) => {
+    // Check to display all or just the category
+    var showAllCategory = false
+    if(lastCategoryClicked == categoryTitle) {
+      showAllCategory = true
+      lastCategoryClicked = null // To permit a new change with this category
+    } else {
+      showAllCategory = false
+      lastCategoryClicked = categoryTitle
+    }
+
+    // Display expense
+    $expenses.forEach(expense => {
+      var expenseCategoryTitle = expense.getAttribute('data-title')
+
+      // Check to display all or just the category
+      if(showAllCategory) {
+        expense.setAttribute('style', 'display: block !important')
+      } else {
+        if(expenseCategoryTitle == categoryTitle) {
+          expense.setAttribute('style', 'display: block !important')
+          addExpenses(parseFloat(expense.getAttribute('data-expense')))
+        } else {
+          expense.setAttribute('style', 'display: none !important')
+        }
+      }
+    })
+
+    if(showAllCategory) {
+      showExpenses(totalExpenses)
+    } else {
+      showExpenses(calcExpenses)
+    }
+  }
+
+  // Get all moneys
+  var $totalExpensesContainer = document.querySelector('#total-expenses')
+  var totalExpenses = $totalExpensesContainer.getAttribute('data-total')
+  var calcExpenses = 0
+
+  // Function to add expenses
+  var addExpenses = (expense) => {
+    calcExpenses += expense
+  }
+
+  // Function to show expenses
+  var showExpenses = (expenses) => {
+    $totalExpensesContainer.innerHTML = expenses
+
+    calcExpenses = 0
+  }
+<% end %>
