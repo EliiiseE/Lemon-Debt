@@ -47,7 +47,7 @@
 
     <div class="col-12 col-lg-5 offset-0 offset-lg-1 mt-5 mt-lg-0 mb-5 pb-5">
       <% @expenses.each do |expense| %>
-        <%= link_to edit_expense_path(expense), class:"d-block bg-secondary py-4 px-4 rounded mb-3 btn-hover", :data => { :title => expense.category.title, :expense => expense.amount.round(2) } do %>
+        <%= link_to edit_expense_path(expense), class:"d-block bg-secondary py-4 px-4 rounded mb-3 btn-hover expense", :data => { :title => expense.category.title, :expense => expense.amount.round(2) } do %>
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-start align-items-center">
               <%= image_tag(expense.category.image, size: 40) %>
@@ -76,7 +76,7 @@
 <%= javascript_tag do %>
   // Variables
   var $categories = document.querySelectorAll('.overview__image')
-  var $expenses = document.querySelectorAll('.expense-hover')
+  var $expenses = document.querySelectorAll('.expense')
   var lastCategoryClicked = null
 
   // Listener onclick
