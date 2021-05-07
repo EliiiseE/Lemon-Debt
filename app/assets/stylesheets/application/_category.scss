@@ -1,7 +1,11 @@
 .overview__image {
     width: 40px;
     height: auto;
-    cursor: pointer;
+    cursor: pointer;  
+    transition: transform 0.4s ease;
+    &:hover{
+         transform: scale(1.10);
+    }
 }
 
 .category__btn-container {
@@ -18,3 +22,9 @@
     }
 }
 
+.category__btn-add{
+    transition: transform 0.4s ease;
+    &:hover{
+         transform: scale(1.25);
+    }
+}

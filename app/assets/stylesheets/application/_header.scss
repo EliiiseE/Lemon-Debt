@@ -1,15 +1,23 @@
-.introduction__header{
-	font-size: 35px;
-    	@media screen  and (max-width: 600px) {
-		font-size: 18px;
+.rounded-bottom {
+	border-bottom-right-radius: 120px 120px !important;
+	border-bottom-left-radius: 120px 120px !important;
+	@media screen  and (max-width: 600px) {
+		border-bottom-right-radius: 60px 60px !important;
+		border-bottom-left-radius: 60px 60px !important;
+	}
+	.image{
+		width: 100px;
+		height: auto;
+		animation: icon-spin 0.5s ease forwards;
+	}
+	.introduction__header{
+		font-size: 35px;
+			@media screen  and (max-width: 600px) {
+			font-size: 18px;
+		}
 	}
 }
 
-.image{
-    width: 100px;
-    height: auto;
-	animation: icon-spin 0.5s ease forwards;
-}
 
 .btn-back{
 	left: 3%;

@@ -64,11 +64,6 @@ a {
 	border-radius: 30px !important;
 }
 
-.rounded-bottom {
-	border-bottom-right-radius: 120px 120px !important;
-	border-bottom-left-radius: 120px 120px !important;
-}
-
 .btn{
 	border-radius: 50px !important;
 	font-weight: 900;
@@ -80,7 +75,7 @@ a {
 }
 
 .btn-hover{
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.4s ease;
  &:hover{
     box-shadow: 1px 1px 12px rgb(219, 219, 219);
     transform: scale(1.05);

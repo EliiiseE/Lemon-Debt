@@ -21,27 +21,27 @@
 <div class="container">
   <div class="row offset-0 offset-lg-1">
     <div class="col-12 col-lg-5">
-
-      <div class="bg-secondary py-5 px-5 rounded">
-        <div class="d-flex flex-row justify-content-between align-items-center">
-          <div class="d-flex flex-column">
-            <h2 class="text-dark mb-0">Expenses</h2>
-            <p class="text-light mt-0">Daily overview</p>
+        
+        <div class="bg-secondary py-5 px-5 rounded">
+          <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="d-flex flex-column">
+              <h2 class="text-dark mb-0">Expenses</h2>
+              <p class="text-light mt-0">Daily overview</p>
+            </div>
+            <h4 class="text-primary">$<span id="total-expenses" data-total=<%= @totalExpenses.round(2) %>><%= @totalExpenses.round(2) %></span></h4>
           </div>
-          <h4 class="text-primary">$<span id="total-expenses" data-total=<%= @totalExpenses.round(2) %>><%= @totalExpenses.round(2) %></span></h4>
+          <div class="d-flex flex-row justify-content-between align-items-center mt-3">
+            <% @categories.each do |category| %>
+              <%= image_tag(category.image, class: 'overview__image', :data => { :title => category.title }) %>
+            <% end %>
+          </div>
         </div>
-        <div class="d-flex flex-row justify-content-between align-items-center mt-3">
-          <% @categories.each do |category| %>
-            <%= image_tag(category.image, class: 'overview__image', :data => { :title => category.title }) %>
-          <% end %>
-        </div>
-      </div>
 
-      <div class="d-none d-lg-block bg-secondary py-5 px-5 mt-5 rounded">
-        <h2 class="text-dark mb-0">New Expenses?</h2>
-        <p class="text-light mt-0">Here you can add a new expense</p>
-        <button type="button" class="btn btn-primary text-secondary py-2 px-4 btn-hover"><%= link_to 'Add', new_expense_path, class:"text-secondary"%></button>
-      </div>
+        <div class="d-none d-lg-block bg-secondary py-5 px-5 mt-5 rounded">
+          <h2 class="text-dark mb-0">New Expenses?</h2>
+          <p class="text-light mt-0">Here you can add a new expense</p>
+          <button type="button" class="btn btn-primary text-secondary py-2 px-4 btn-hover"><%= link_to 'Add', new_expense_path, class:"text-secondary"%></button>
+        </div>
 
     </div> 
 
