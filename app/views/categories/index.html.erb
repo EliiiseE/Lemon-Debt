@@ -3,26 +3,11 @@
             small: "Welcome back,",
             large: "John Doe!" %>
 
-<!--
-
-<svg xmlns="http://www.w3.org/2000/svg" width="277" height="277" viewBox="0 0 277 277">
-  <g id="Ellipse_10" data-name="Ellipse 10" fill="none" stroke="#707070" stroke-width="20">
-    <circle cx="138.5" cy="138.5" r="138.5" stroke="none"/>
-    <circle cx="138.5" cy="138.5" r="128.5" fill="none"/>
-  </g>
-  <g id="Ellipse_11" data-name="Ellipse 11" fill="none" stroke="red" stroke-width="20">
-    <circle cx="138.5" cy="138.5" r="138.5" stroke="none"/>
-    <circle cx="138.5" cy="138.5" r="128.5" fill="none"/>
-  </g>
-</svg>
-
--->
-
 <div class="container">
   <div class="row offset-0 offset-lg-1">
     <div class="col-12 col-lg-5">
         
-        <div class="bg-secondary py-5 px-5 rounded">
+        <div class="overview__container bg-secondary py-5 px-5 rounded">
           <div class="d-flex flex-row justify-content-between align-items-center">
             <div class="d-flex flex-column">
               <h2 class="text-dark mb-0">Expenses</h2>
@@ -32,7 +17,13 @@
           </div>
           <div class="d-flex flex-row justify-content-between align-items-center mt-3">
             <% @categories.each do |category| %>
+            <div class="position-relative image__container d-flex justify-content-center align-items-center" data-title="<%= category.title %>">
+              <svg class="radial-progress position-absolute" data-percentage="50" data-title="<%= category.title %>" viewBox="0 0 80 80">
+                <circle class="incomplete" cx="40" cy="40" r="35" data-title="<%= category.title %>"></circle>
+                <circle class="complete" cx="40" cy="40" r="35" data-title="<%= category.title %>"></circle>
+              </svg>
               <%= image_tag(category.image, class: 'overview__image', :data => { :title => category.title }) %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -75,7 +66,7 @@
 
 <%= javascript_tag do %>
   // Variables
-  var $categories = document.querySelectorAll('.overview__image')
+  var $categories = document.querySelectorAll('.image__container')
   var $expenses = document.querySelectorAll('.expense')
   var lastCategoryClicked = null
 
@@ -83,7 +74,7 @@
   $categories.forEach(category => {
     category.addEventListener('click', (e) => {
       var categoryTitle = e.srcElement.getAttribute('data-title')
-      
+
       checkExpense(categoryTitle)
     })
   })
@@ -124,6 +115,7 @@
     }
   }
 
+
   // Get all moneys
   var $totalExpensesContainer = document.querySelector('#total-expenses')
   var totalExpenses = $totalExpensesContainer.getAttribute('data-total')
@@ -140,4 +132,43 @@
 
     calcExpenses = 0
   }
+
+
+  // Set data money to each category for circle percentage
+  var $radialProgress = document.querySelectorAll('.radial-progress')
+  var calcCategoryExpenses = 0
+
+  // Function to add expenses
+  var addCategoryExpenses = (expense) => {
+    calcCategoryExpenses += expense
+  }
+
+  // Calc expense for each category
+  $radialProgress.forEach($radial => {
+    var actualCategory = $radial.getAttribute('data-title')
+    var $expenses = document.querySelectorAll(`.expense[data-title="${actualCategory}"]`)
+
+    // Get all expense related to the category
+    $expenses.forEach($expense => {
+      var actualExpense = $expense.getAttribute('data-expense')
+      addCategoryExpenses(parseFloat(actualExpense))
+    })
+
+    // Set the actual percentage
+    var expensePercent = calcCategoryExpenses / totalExpenses * 100
+    $radial.setAttribute("data-percentage", expensePercent)
+
+    calcCategoryExpenses = 0
+  })
+
+
+  // Circle animation
+  $radialProgress.forEach($radial => {
+    var percent = $radial.getAttribute('data-percentage')
+    var radius = $radial.querySelector('circle.complete').getAttribute('r')
+    var circumference = 2 * Math.PI * radius
+    var strokeDashOffset = circumference - ((percent * circumference) / 100)
+
+    $radial.querySelector('circle.complete').style.strokeDashoffset = strokeDashOffset
+  })
 <% end %>
